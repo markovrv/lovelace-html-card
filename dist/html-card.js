@@ -1,9 +1,15 @@
 const TEMPLATE_REGEX = /\[\[.*?\]\]/gm;
 
 function getDayOfWeek(date) {
-    const dayOfWeek = new Date(date).getDay();    
+    const dayOfWeek = new Date(date).getDay();
     return isNaN(dayOfWeek) ? null : ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'][dayOfWeek];
-  }
+}
+
+const getMonth = (date = new Date) =>
+([
+    'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+    'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
+][date.getMonth()]);
 
 class HtmlCard extends HTMLElement {
 
@@ -64,7 +70,7 @@ class HtmlCard extends HTMLElement {
             return ``;
         }
         window.hass = this._hass;
-        
+
         var out = [];
 
         if (this._config.script) eval(this._config.script);
