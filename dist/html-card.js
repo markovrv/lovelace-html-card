@@ -1,5 +1,10 @@
 const TEMPLATE_REGEX = /\[\[.*?\]\]/gm;
 
+function getDayOfWeek(date) {
+    const dayOfWeek = new Date(date).getDay();    
+    return isNaN(dayOfWeek) ? null : ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'][dayOfWeek];
+  }
+
 class HtmlCard extends HTMLElement {
 
     static get properties() {
