@@ -63,6 +63,7 @@ class HtmlCard extends HTMLElement {
         }
         window.hass = this._hass;
         let header = ``;
+        let style = ``;
         let content = this._config.content;
         let outputContent = content.replace(/\r?\n|\r/g, "");
         let m;
