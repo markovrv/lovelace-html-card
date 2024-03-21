@@ -33,6 +33,12 @@ class HtmlCard extends HTMLElement {
         if (!config.content) {
             throw new Error("You need to define 'content' in your configuration.")
         }
+        if (!config.style) {
+            throw new Error("You need to define 'style' in your configuration.")
+        }
+        if (!config.script) {
+            throw new Error("You need to define 'script' in your configuration.")
+        }
         let entities = [];
         let m;
         while ((m = TEMPLATE_REGEX.exec(config.content)) !== null) {
