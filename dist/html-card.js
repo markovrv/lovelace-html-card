@@ -56,8 +56,6 @@ class HtmlCard extends HTMLElement {
             return ``;
         }
         window.hass = this._hass;
-
-        var out = '';
         
         if (this._config.script) eval(this._config.script);
 
@@ -75,9 +73,7 @@ class HtmlCard extends HTMLElement {
                 let split = e.split(".");
                 let dots = split.length - 1;
                 let output;
-                if (dots === 0 && out) {
-                    output = out;
-                } else if (dots === 1 || dots === 2 && split[2] === "state") {
+                if (dots === 1 || dots === 2 && split[2] === "state") {
                     let id = split[0] + "." + split[1];
                     output = this._hass.states[id].state;
                 } else if (dots === 3 && split[2] === "attributes") {
