@@ -55,7 +55,9 @@ class HtmlCard extends HTMLElement {
         if (!this._config || !this._hass) {
             return ``;
         }
+        window.hass = this._hass;
         let header = ``;
+        let script = ``;
         let content = this._config.content;
         let outputContent = content.replace(/\r?\n|\r/g, "");
         let m;
@@ -81,9 +83,11 @@ class HtmlCard extends HTMLElement {
                 outputContent = outputContent.replace(match, output);
             });
         }
+        if (this._config.script)
+            script = `<script>${this._config.script}</script>`;
         if (this._config.title)
             header = `<div class="card-header" style="padding: 8px 0 16px 0;"><div class="name">${this._config.title}</div></div>`;
-        this.innerHTML = `<ha-card id="htmlCard" style="padding: 16px">${header}<div>${outputContent}</div></ha-card>`;
+        this.innerHTML = `<ha-card id="htmlCard" style="padding: 16px">${header}<div>${outputContent}</div></ha-card>${script}`;
     }
 
     getCardSize() {
