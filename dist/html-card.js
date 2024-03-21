@@ -1,12 +1,12 @@
 const TEMPLATE_REGEX = /\[\[.*?\]\]/gm;
 
-function getDayOfWeek(date) {
-    const dayOfWeek = new Date(date).getDay();
+function getDayOfWeek() {
+    const dayOfWeek = new Date().getDay();
     return isNaN(dayOfWeek) ? null : ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'][dayOfWeek];
 }
 
-function getMonth(date) {
-    const month = new Date(date).getMonth();
+function getMonth() {
+    const month = new Date().getMonth();
     return isNaN(month) ? null : [ 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'][month];
 }
 
