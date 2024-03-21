@@ -5,11 +5,10 @@ function getDayOfWeek(date) {
     return isNaN(dayOfWeek) ? null : ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'][dayOfWeek];
 }
 
-const getMonth = (date = new Date) =>
-([
-    'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-    'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
-][date.getMonth()]);
+function getMonth(date) {
+    const month = new Date(date).getMonth();
+    return isNaN(month) ? null : [ 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'][month];
+}
 
 class HtmlCard extends HTMLElement {
 
