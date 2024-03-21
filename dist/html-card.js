@@ -42,8 +42,11 @@ class HtmlCard extends HTMLElement {
             m.forEach(match => {
                 let e = match.replace("[[", "").replace("]]", "").replace(/\s/gm, "");
                 let split = e.split(".");
-                let entity_id = split[0] + "." + split[1];
-                entities.push(entity_id);
+                let dots = split.length - 1;
+                if (dots > 0) {
+                    let entity_id = split[0] + "." + split[1];
+                    entities.push(entity_id);
+                }
             });
         }
         this._entities = entities;
@@ -73,7 +76,9 @@ class HtmlCard extends HTMLElement {
                 let split = e.split(".");
                 let dots = split.length - 1;
                 let output;
-                if (dots === 1 || dots === 2 && split[2] === "state") {
+                if (dots === 0 && split[0] && window[split[0]]) {
+                    output = window[split[0]];
+                } else if (dots === 1 || dots === 2 && split[2] === "state") {
                     let id = split[0] + "." + split[1];
                     output = this._hass.states[id].state;
                 } else if (dots === 3 && split[2] === "attributes") {
