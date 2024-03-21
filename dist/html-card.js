@@ -57,6 +57,8 @@ class HtmlCard extends HTMLElement {
         }
         window.hass = this._hass;
         
+        if (this._config.script) eval(this._config.script);
+
         let header = ``;
         let style = ``;
         let content = this._config.content;
@@ -71,7 +73,9 @@ class HtmlCard extends HTMLElement {
                 let split = e.split(".");
                 let dots = split.length - 1;
                 let output;
-                if (dots === 1 || dots === 2 && split[2] === "state") {
+                if (dots === 0 && window[split[0]]) {
+                    output = window[split[0]];
+                } else if (dots === 1 || dots === 2 && split[2] === "state") {
                     let id = split[0] + "." + split[1];
                     output = this._hass.states[id].state;
                 } else if (dots === 3 && split[2] === "attributes") {
@@ -89,7 +93,6 @@ class HtmlCard extends HTMLElement {
         if (this._config.style)
             style = `<style>${this._config.style}</style>`;
         this.innerHTML = `<ha-card id="htmlCard" style="padding: 16px">${style}${header}<div>${outputContent}</div></ha-card>`;
-        if (this._config.script) eval(this._config.script);
     }
 
     getCardSize() {
